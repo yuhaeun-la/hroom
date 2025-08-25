@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Database and SQL files
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Supabase local development
+supabase/.branches
+supabase/.temp
