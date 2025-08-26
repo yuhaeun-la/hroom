@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'config/supabase_config.dart';
 import 'providers/auth_provider.dart';
 import 'screens/auth/login_screen.dart';
@@ -11,6 +12,9 @@ void main() async {
   
   // Supabase 초기화
   await SupabaseConfig.initialize();
+  
+  // 한국어 날짜 포맷팅 초기화
+  await initializeDateFormatting('ko_KR', null);
   
   runApp(const ProviderScope(child: HRoomApp()));
 }
