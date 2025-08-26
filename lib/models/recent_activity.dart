@@ -21,9 +21,18 @@ class RecentActivity {
 
   String get timeAgo {
     final now = DateTime.now();
-    final difference = now.difference(timestamp);
+    // UTC 시간을 로컬 시간으로 변환
+    final localTimestamp = timestamp.toLocal();
+    final difference = now.difference(localTimestamp);
 
-    if (difference.inMinutes < 60) {
+    // 음수가 나오면 (미래 시간이면) 0분 전으로 처리
+    if (difference.isNegative) {
+      return '방금 전';
+    }
+
+    if (difference.inMinutes < 1) {
+      return '방금 전';
+    } else if (difference.inMinutes < 60) {
       return '${difference.inMinutes}분 전';
     } else if (difference.inHours < 24) {
       return '${difference.inHours}시간 전';

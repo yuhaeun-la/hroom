@@ -82,16 +82,18 @@ class PointsHistory {
   // 포맷된 날짜
   String get formattedDate {
     final now = DateTime.now();
-    final difference = now.difference(createdAt);
+    // UTC 시간을 로컬 시간으로 변환
+    final localCreatedAt = createdAt.toLocal();
+    final difference = now.difference(localCreatedAt);
 
     if (difference.inDays == 0) {
-      return '오늘 ${createdAt.hour.toString().padLeft(2, '0')}:${createdAt.minute.toString().padLeft(2, '0')}';
+      return '오늘 ${localCreatedAt.hour.toString().padLeft(2, '0')}:${localCreatedAt.minute.toString().padLeft(2, '0')}';
     } else if (difference.inDays == 1) {
-      return '어제 ${createdAt.hour.toString().padLeft(2, '0')}:${createdAt.minute.toString().padLeft(2, '0')}';
+      return '어제 ${localCreatedAt.hour.toString().padLeft(2, '0')}:${localCreatedAt.minute.toString().padLeft(2, '0')}';
     } else if (difference.inDays < 7) {
       return '${difference.inDays}일 전';
     } else {
-      return '${createdAt.month}/${createdAt.day}';
+      return '${localCreatedAt.month}/${localCreatedAt.day}';
     }
   }
 

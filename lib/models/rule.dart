@@ -27,6 +27,7 @@ class Rule {
     required this.updatedAt,
   });
 
+//역직렬화, 데이터를 객체로 변환
   factory Rule.fromJson(Map<String, dynamic> json) {
     return Rule(
       id: json['id'],
